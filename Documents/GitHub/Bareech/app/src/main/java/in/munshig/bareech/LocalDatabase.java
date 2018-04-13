@@ -140,6 +140,10 @@ public class LocalDatabase extends SQLiteOpenHelper {
         values.put(BARCODE, barcode);
 
         db.insert(BARCODE_SPEECH, null, values);
+        MainActivity.datauser.child(itemname).child(ITEM_NAME).setValue(itemname);
+        MainActivity.datauser.child(itemname).child(CATEGORY).setValue(category);
+        MainActivity.datauser.child(itemname).child(UNIT).setValue(unit);
+        MainActivity.datauser.child(itemname).child(BARCODE).setValue(barcode);
     }
 
     public void updatetablefor0and1(String itemname, String col, int num)
@@ -151,6 +155,7 @@ public class LocalDatabase extends SQLiteOpenHelper {
         String WHERE1 = String.format("%s='%s'", ITEM_NAME, itemname);
 
         db.update(BARCODE_SPEECH,values, WHERE1, null);
+        MainActivity.datauser.child(itemname).child(col).setValue(num);
     }
 
     public LocalDatabase(Context context) {

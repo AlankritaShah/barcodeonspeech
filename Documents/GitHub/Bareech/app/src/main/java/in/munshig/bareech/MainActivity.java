@@ -31,6 +31,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
 import android.widget.ToggleButton;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     static int k=0;
     TextView vieweditems, saveditems;
     SharedPrefs sp;
+    public static DatabaseReference datauser;
   //  static String[] listofitems = new String[300];
 
     @Override
@@ -95,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
         sp = SharedPrefs.getInstance(getApplicationContext());
         k=sp.getbillno();
+
+        datauser = FirebaseDatabase.getInstance().getReference(ldb.userphone);
 
 
         final String[] listofitems = new String[]{
