@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF" >
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemname"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:hint="item" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GRAM"
+        android:id="@+id/toggleButton"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/itemname"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="27dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ML"
+        android:id="@+id/toggleButton2"
+        android:layout_alignBottom="@+id/toggleButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unit"
+        android:id="@+id/toggleButton3"
+        android:layout_alignTop="@+id/toggleButton2"
+        android:layout_toEndOf="@+id/toggleButton2"
+        android:layout_marginStart="29dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Small"
+        android:id="@+id/textView"
+        android:layout_below="@+id/toggleButton"
+        android:layout_alignEnd="@+id/toggleButton"
+        android:layout_marginTop="38dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginBottom="65dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Large"
+        android:id="@+id/textView3"
+        android:layout_marginBottom="61dp"
+        android:layout_above="@+id/button2"
+
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No"
+        android:id="@+id/button2"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignParentStart="true" />
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton4"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"
+        android:textOn="1"
+        android:textOff="1"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton5"
+        android:layout_alignBottom="@+id/toggleButton4"
+        android:layout_toEndOf="@+id/toggleButton4"
+        android:visibility="invisible"
+        android:textOn="2"
+        android:textOff="2"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton6"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/toggleButton5"
+        android:visibility="invisible"
+        android:textOn="5"
+        android:textOff="5"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton7"
+        android:layout_alignTop="@+id/toggleButton6"
+        android:layout_toEndOf="@+id/toggleButton6"
+        android:visibility="invisible"
+        android:textOn="10"
+        android:textOff="10"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton8"
+        android:layout_above="@+id/textView3"
+        android:layout_toStartOf="@+id/toggleButton5"
+        android:layout_marginBottom="15dp"
+        android:visibility="invisible"
+        android:textOn="50"
+        android:textOff="50"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton9"
+        android:layout_alignBottom="@+id/toggleButton8"
+        android:layout_toEndOf="@+id/toggleButton8"
+        android:visibility="invisible"
+        android:textOn="100"
+        android:textOff="100"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton10"
+        android:visibility="invisible"
+        android:textOn="250"
+        android:textOff="250"
+        android:layout_alignTop="@+id/toggleButton9"
+        android:layout_toStartOf="@+id/toggleButton11" />
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton11"
+        android:layout_alignBottom="@+id/toggleButton10"
+        android:layout_alignStart="@+id/toggleButton3"
+        android:visibility="invisible"
+        android:textOn="500"
+        android:textOff="500"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton12"
+        android:layout_alignTop="@+id/toggleButton15"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"
+        android:textOn="1000"
+        android:textOff="1000"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton13"
+        android:layout_alignBottom="@+id/toggleButton12"
+        android:layout_toEndOf="@+id/toggleButton12"
+        android:visibility="invisible"
+        android:textOn="2000"
+        android:textOff="2000"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton14"
+        android:layout_alignBottom="@+id/toggleButton13"
+        android:layout_toEndOf="@+id/toggleButton13"
+        android:visibility="invisible"
+        android:textOn="2500"
+        android:textOff="2500"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton15"
+        android:layout_above="@+id/button"
+        android:layout_toEndOf="@+id/toggleButton14"
+        android:visibility="invisible"
+        android:textOn="5000"
+        android:textOff="5000"/>
+
+</RelativeLayout>
