@@ -51,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
     static ToggleButton big[] = new ToggleButton[4];
     static Button exists, DNexists;
     static TextView sm,md,lg;
-    static int unitvalue;
+    static int unitvalue=-1;
     static int k=0;
+    TextView vieweditems, saveditems;
+    SharedPrefs sp;
   //  static String[] listofitems = new String[300];
 
     @Override
@@ -60,9 +62,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ActionBar actionbar = getSupportActionBar();
-        actionbar.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        actionbar.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
 
         final LocalDatabase ldb = new LocalDatabase(getApplicationContext());
+
+        vieweditems = (TextView) findViewById(R.id.vieweditems);
+        saveditems = (TextView) findViewById(R.id.saveditems);
+
         unit[0] = (Button)findViewById(R.id.toggleButton);
         unit[1] = (Button)findViewById(R.id.toggleButton2);
         unit[2] = (Button)findViewById(R.id.toggleButton3);
@@ -86,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
         sm = (TextView)findViewById(R.id.textView);
         md = (TextView)findViewById(R.id.textView2);
         lg = (TextView)findViewById(R.id.textView3);
+
+        sp = SharedPrefs.getInstance(getApplicationContext());
+        k=sp.getbillno();
+
 
         final String[] listofitems = new String[]{
                 "अगरबत्ती",
@@ -112,13 +122,10 @@ public class MainActivity extends AppCompatActivity {
                 "काला नमक",
                 "काली इलायची",
                 "काली मिर्च",
-                "नेपकिन",
                 "किशमिश",
                 "कुमकुम",
                 "केची",
                 "केसर",
-                "कैंडल",
-                "मोमबत्ती",
                 "कॉफ़ी",
                 "क्लीनर",
                 "खजूर",
@@ -136,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                 "चना दाल ",
                 "चपड़ा",
                 "मूंगफली पट्टी",
-                "चाय की छलनी",
                 "चाय पत्ती",
                 "चारोली",
                 "चार्ट",
@@ -145,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
                 "छलनी",
                 "चावल",
                 "चिक्की",
-                "गजक",
                 "चिप्स",
                 "चीज़",
                 "चीनी पाउडर",
@@ -182,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
                 "तेजपत्ता",
                 "थैली",
                 "दलिया",
-                "दाख",
                 "दाल",
                 "दालचीनी",
                 "दिलबाग पान मसाला",
@@ -203,7 +207,6 @@ public class MainActivity extends AppCompatActivity {
                 "पिसा हुआ धनिया",
                 "पिस्ता",
                 "पूजा सामग्री",
-                "पेड़ नोटपैड",
                 "पेन",
                 "पेपर बैग",
                 "पेंसिल",
@@ -211,14 +214,12 @@ public class MainActivity extends AppCompatActivity {
                 "पोछा",
                 "पोहा",
                 "प्याज",
-                "प्लास्टिक थैली",
                 "प्लास्टिक ग्लास",
                 "प्लेट",
                 "प्लेयर्स कार्ड",
                 "फिनाइल गोली",
                 "फ्राई चना",
                 "फ्रेम्स",
-                "चाय पत्ती",
                 "हेयर ऑयल",
                 "इलायची",
                 "नेपकिन",
@@ -262,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
                 "रजिस्टर",
                 "रबड़",
                 "रबड़ बैंड",
-                "रसना",
                 "रस्सी",
                 "राई",
                 "राजमा",
@@ -274,10 +274,8 @@ public class MainActivity extends AppCompatActivity {
                 "लाइटर",
                 "लिप गार्ड",
                 "लिप बाम",
-                "लॉक",
                 "लौंग",
                 "वाइपर",
-                "शंकर छाप",
                 "शक्कर",
                 "शटल कॉक",
                 "शैमपू",
@@ -300,7 +298,6 @@ public class MainActivity extends AppCompatActivity {
                 "सुपारी",
                 "सूजी",
                 "सेफ्टी पिन",
-                "सेंसर",
                 "सोंठ",
                 "सोया बड़ी",
                 "स्केच पैन",
@@ -309,14 +306,242 @@ public class MainActivity extends AppCompatActivity {
                 "हल्दी",
                 "हींग",
                 "हुक",
-                "हैंकी",
-                "हैंड वॉश"
+                "हैंकी"
         };
 
+        final String[] listofcategories = new String[]{
+                "H",
+                "F",
+                "F",
+                "F",
+                "F",
+                "S",
+                "H",
+                "S",
+                "F",
+                "F",
+                "F",
+                "F",
+                "S",
+                "F",
+                "S",
+                "S",
+                "H",
+                "H",
+                "O",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "H",
+                "S",
+                "F",
+                "F",
+                "H",
+                "F",
+                "F",
+                "F",
+                "S",
+                "F",
+                "F",
+                "O",
+                "O",
+                "F",
+                "F",
+                "H",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "S",
+                "S",
+                "S",
+                "H",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "H",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "H",
+                "S",
+                "O",
+                "H",
+                "O",
+                "F",
+                "F",
+                "S",
+                "F",
+                "H",
+                "F",
+                "F",
+                "H",
+                "F",
+                "O",
+                "O",
+                "F",
+                "F",
+                "O",
+                "O",
+                "F",
+                "F",
+                "F",
+                "F",
+                "O",
+                "F",
+                "F",
+                "F",
+                "O",
+                "F",
+                "H",
+                "H",
+                "H",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "S",
+                "O",
+                "O",
+                "F",
+                "F",
+                "F",
+                "H",
+                "S",
+                "O",
+                "S",
+                "S",
+                "H",
+                "F",
+                "F",
+                "O",
+                "O",
+                "O",
+                "H",
+                "F",
+                "O",
+                "H",
+                "F",
+                "H",
+                "F",
+                "O",
+                "H",
+                "O",
+                "H",
+                "H",
+                "O",
+                "O",
+                "H",
+                "O",
+                "F",
+                "F",
+                "H",
+                "F",
+                "F",
+                "F",
+                "H",
+                "F",
+                "O",
+                "H",
+                "F",
+                "O",
+                "S",
+                "O",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "F",
+                "O",
+                "H",
+                "H",
+                "S",
+                "S",
+                "S",
+                "O",
+                "F",
+                "F",
+                "S",
+                "O",
+                "O",
+                "F",
+                "F",
+                "O",
+                "O",
+                "O",
+                "F",
+                "H",
+                "F",
+                "O",
+                "H",
+                "F",
+                "H",
+                "F",
+                "H",
+                "F",
+                "F",
+                "H",
+                "F",
+                "F",
+                "F",
+                "F",
+                "O",
+                "F",
+                "F",
+                "H",
+                "F",
+                "O",
+                "F",
+                "S",
+                "F",
+                "F",
+                "S",
+                "S",
+                "H",
+                "F",
+                "F",
+                "H",
+                "H"
+        };
+
+        vieweditems.setText(String.valueOf(k) + "/" + listofitems.length);
+        saveditems.setText(String.valueOf(ldb.getcountofitemssaved()));
 
         if(k<listofitems.length) {
             name.setText(listofitems[k]);
+//            SomeModel smodel = ldb.searchitem(name);
+//            if (smodel!=null) {
+//
+//               abkyahoga(name.getText().toString().trim(), smodel.unit);
+//               if(smodel.ONE!=null)
+//               {
+//                   small[0].setChecked(true);
+//               }
+//
+//
+//            }
 
+         //   else{
+//                unit[0].setVisibility(View.VISIBLE);
+//                unit[1].setVisibility(View.VISIBLE);
+//                unit[2].setVisibility(View.VISIBLE);
             unit[0].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -327,7 +552,8 @@ public class MainActivity extends AppCompatActivity {
                             InputMethodManager.HIDE_NOT_ALWAYS);
                     unitvalue = 0;
                     String namevalue = name.getText().toString().trim();
-                    abkyahoga(namevalue,unitvalue);
+                    abkyahoga(namevalue, unitvalue);
+                    //   unitvalue=-1;
                 }
             });
 
@@ -341,7 +567,8 @@ public class MainActivity extends AppCompatActivity {
                             InputMethodManager.HIDE_NOT_ALWAYS);
                     unitvalue = 1;
                     String namevalue = name.getText().toString().trim();
-                    abkyahoga(namevalue,unitvalue);
+                    abkyahoga(namevalue, unitvalue);
+                    //   unitvalue=-1;
                 }
             });
 
@@ -355,23 +582,24 @@ public class MainActivity extends AppCompatActivity {
                             InputMethodManager.HIDE_NOT_ALWAYS);
                     unitvalue = 2;
                     String namevalue = name.getText().toString().trim();
-                    abkyahoga(namevalue,unitvalue);
+                    abkyahoga(namevalue, unitvalue);
+                    //    unitvalue=-1;
                 }
             });
 
             DNexists.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                  //  name.setText("");
-                    if(k<listofitems.length-1)
-                    {
+                    //  name.setText("");
+                    if (k < listofitems.length - 1) {
+                        vieweditems.setText(String.valueOf(k + 1) + "/" + listofitems.length);
                         k++;
                         name.setText(listofitems[k]);
-                    }
-
-
-                    else {
+                    } else {
+//                        vieweditems.setText(String.valueOf(k + 1) + "/" + listofitems.length);
+ //                       k = 0;
                         name.setText("");
+                        Toast.makeText(getApplicationContext(), "End of list.", Toast.LENGTH_LONG).show();
 
                     }
                     sm.setVisibility(View.INVISIBLE);
@@ -393,59 +621,110 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     String namevalue = name.getText().toString().trim();
-                    if (!namevalue.equals("")) {
-                        ldb.saveitemname(namevalue, unitvalue);
-//                    for(int i=0;i<3;i++)
-//                    {
-////                        if(unitvalue.isChecked())
-////                        {
-//                            ldb.saveitemname(namevalue, i);
-//                            break;
-//                      //  }
-//                    }
+                    if (!namevalue.equals("") && unitvalue != -1) {
+                        String itemcode = "";
+                        if (k <= 9)
+                            itemcode = "100" + String.valueOf(k);
+                        else if (k <= 99)
+                            itemcode = "10" + String.valueOf(k);
+                        else if (k <= 999)
+                            itemcode = "1" + String.valueOf(k);
+
+                        int catofitem = 0;
+                        if (listofcategories[k] == "H")
+                            catofitem = 1;
+                        else if (listofcategories[k] == "S")
+                            catofitem = 2;
+                        else if (listofcategories[k] == "F")
+                            catofitem = 3;
+                        else if (listofcategories[k] == "O")
+                            catofitem = 4;
+
+                        String barcode = "444" + ldb.userphone + String.valueOf(catofitem) + itemcode;
+                        ldb.saveitemname(namevalue, catofitem, unitvalue, barcode);
+                        ldb.saveinreferencetable(itemcode, namevalue);
+                        Boolean save = sp.savebillno(k + 1);
+
                         for (int i = 0; i < 4; i++) {
                             if (small[i].isChecked()) {
                                 if (i == 0)
-                                    ldb.updatetablefor0and1(namevalue, "ONE");
+                                    ldb.updatetablefor0and1(namevalue, "ONE", 1);
                                 if (i == 1)
-                                    ldb.updatetablefor0and1(namevalue, "TWO");
+                                    ldb.updatetablefor0and1(namevalue, "TWO", 1);
                                 if (i == 2)
-                                    ldb.updatetablefor0and1(namevalue, "FIVE");
+                                    ldb.updatetablefor0and1(namevalue, "FIVE", 1);
                                 if (i == 3)
-                                    ldb.updatetablefor0and1(namevalue, "TEN");
+                                    ldb.updatetablefor0and1(namevalue, "TEN", 1);
+                            }
+                            else
+                            {
+                                if (i == 0)
+                                    ldb.updatetablefor0and1(namevalue, "ONE", 0);
+                                if (i == 1)
+                                    ldb.updatetablefor0and1(namevalue, "TWO", 0);
+                                if (i == 2)
+                                    ldb.updatetablefor0and1(namevalue, "FIVE", 0);
+                                if (i == 3)
+                                    ldb.updatetablefor0and1(namevalue, "TEN", 0);
                             }
                             if (medium[i].isChecked()) {
                                 if (i == 0)
-                                    ldb.updatetablefor0and1(namevalue, "FIFTY");
+                                    ldb.updatetablefor0and1(namevalue, "FIFTY", 1);
                                 if (i == 1)
-                                    ldb.updatetablefor0and1(namevalue, "HUNDRED");
+                                    ldb.updatetablefor0and1(namevalue, "HUNDRED", 1);
                                 if (i == 2)
-                                    ldb.updatetablefor0and1(namevalue, "TWOFIFTY");
+                                    ldb.updatetablefor0and1(namevalue, "TWOFIFTY", 1);
                                 if (i == 3)
-                                    ldb.updatetablefor0and1(namevalue, "FIVEHUNDRED");
+                                    ldb.updatetablefor0and1(namevalue, "FIVEHUNDRED", 1);
+                            }
+                            else
+                            {
+                                if (i == 0)
+                                    ldb.updatetablefor0and1(namevalue, "FIFTY", 0);
+                                if (i == 1)
+                                    ldb.updatetablefor0and1(namevalue, "HUNDRED", 0);
+                                if (i == 2)
+                                    ldb.updatetablefor0and1(namevalue, "TWOFIFTY", 0);
+                                if (i == 3)
+                                    ldb.updatetablefor0and1(namevalue, "FIVEHUNDRED", 0);
                             }
                             if (big[i].isChecked()) {
                                 if (i == 0)
-                                    ldb.updatetablefor0and1(namevalue, "THOUSAND");
+                                    ldb.updatetablefor0and1(namevalue, "THOUSAND", 1);
                                 if (i == 1)
-                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSAND");
+                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSAND", 1);
                                 if (i == 2)
-                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSANDFIVEHUNDRED");
+                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSANDFIVEHUNDRED", 1);
                                 if (i == 3)
-                                    ldb.updatetablefor0and1(namevalue, "FIVETHOUSAND");
+                                    ldb.updatetablefor0and1(namevalue, "FIVETHOUSAND", 1);
+                            }
+                            else
+                            {
+                                if (i == 0)
+                                    ldb.updatetablefor0and1(namevalue, "THOUSAND", 0);
+                                if (i == 1)
+                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSAND", 0);
+                                if (i == 2)
+                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSANDFIVEHUNDRED", 0);
+                                if (i == 3)
+                                    ldb.updatetablefor0and1(namevalue, "FIVETHOUSAND", 0);
                             }
                         }
-                     //   name.setText("");
-                      //  k++;
-                        if(k<listofitems.length-1)
-                        {
+                        //   name.setText("");
+                        //  k++;
+                        if (k < listofitems.length - 1) {
+                            vieweditems.setText(String.valueOf(k + 1) + "/" + listofitems.length);
+                            saveditems.setText(String.valueOf(ldb.getcountofitemssaved()));
                             k++;
                             name.setText(listofitems[k]);
-                        }
-
-
-                        else {
+                        } else {
+//                            vieweditems.setText(String.valueOf(k + 1) + "/" + listofitems.length);
+//                            saveditems.setText(String.valueOf(ldb.getcountofitemssaved()));
+//                            k = 0;
+//                            name.setText(listofitems[k]);
                             name.setText("");
+                            Toast.makeText(getApplicationContext(), "End of list.", Toast.LENGTH_LONG).show();
+
 
                         }
                         sm.setVisibility(View.INVISIBLE);
@@ -464,12 +743,18 @@ public class MainActivity extends AppCompatActivity {
                             medium[j].setVisibility(View.INVISIBLE);
                             big[j].setVisibility(View.INVISIBLE);
                         }
+                        Log.i("returnref", ldb.iwanttoseethereftable());
                         Log.i("return", ldb.iwanttoseethetable());
-
+                        unitvalue = -1;
                     }
+                    if (!namevalue.equals("") && unitvalue == -1) {
+                        Toast.makeText(getApplicationContext(), "Select one of the units to proceed.", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
             });
+   //     }
         }
 
 //        else if(k>=listofitems.length)
@@ -613,12 +898,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        Log.i("menu","getmenuinflater");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.backbutton:
+            {
+                startActivity(new Intent(MainActivity.this, ViewActivity.class));
+
+                break;
+            }
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+
 
     public void abkyahoga(String namevalue, int someunitvalue)
     {
-//        for(int i=0;i<3;i++)
-//        {
-//            if(unit[i].isChecked()) {
                 if (!namevalue.equals("")) {
                     sm.setVisibility(View.VISIBLE);
                     md.setVisibility(View.VISIBLE);
@@ -633,7 +943,7 @@ public class MainActivity extends AppCompatActivity {
                         md.setText("miliLitre - Medium");
                         lg.setText("miliLitre - Large");
                     }
-                    else if(someunitvalue == 3) {
+                    else if(someunitvalue == 2) {
                         sm.setText("unit - Small");
                         md.setText("unit - Medium");
                         lg.setText("unit - Large");
@@ -644,12 +954,6 @@ public class MainActivity extends AppCompatActivity {
                         big[j].setVisibility(View.VISIBLE);
 
                     }
-
-                  //  break;
                 }
-//            }
-//        }
     }
-
-
 }

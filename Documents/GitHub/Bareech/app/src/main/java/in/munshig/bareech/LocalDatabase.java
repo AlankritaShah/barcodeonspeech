@@ -36,12 +36,65 @@ public class LocalDatabase extends SQLiteOpenHelper {
 
      /*---------------------Bills Table Details----------------------------------------*/
 
+    private static final String REFERENCE_TABLE = "referencetable";
+
+    private static final String ITEMCODE = "itemcode";
+    private static final String ITEMNAME = "itemname";
+
+    private static final String TABLE_REFERENCE_TABLE = REFERENCE_TABLE + " ("
+            + ITEMCODE            + " TEXT,"
+            + ITEMNAME            + " TEXT "
+            + ")";
+
+    public void saveinreferencetable(String itemcode, String itemname)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // db.execSQL(CREATE_IF_NOT_EXISTS+TABLE_BILLS);
+        ContentValues values = new ContentValues();
+        values.put(ITEMCODE, itemcode);
+        values.put(ITEMNAME, itemname);
+
+        db.insert(REFERENCE_TABLE, null, values);
+    }
+
+    public String iwanttoseethereftable()
+    {
+        String selectQuery = "SELECT * FROM " + REFERENCE_TABLE;
+        Log.e(LOG, selectQuery);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        String whatever = "";
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                Log.i("found", "something");
+                if(c.getString(c.getColumnIndex(ITEMCODE))!=null) {
+                    whatever = whatever + "\n" + ITEMCODE +" - " + c.getString(c.getColumnIndex(ITEMCODE));
+                }
+                if(c.getString(c.getColumnIndex(ITEMNAME))!=null) {
+                    whatever = whatever + "\n" + ITEMNAME +" - " + c.getString(c.getColumnIndex(ITEMNAME));
+                }
+
+                whatever = whatever + "\n";
+
+            } while (c.moveToNext());
+        }
+        return whatever;
+
+    }
+
+    //end of refernce table
+
+
     // Table Name
-    private static final String BARCODE_SPEECH = "barcodespeech";
+    private static final String BARCODE_SPEECH = "_" + userphone;
 
     //  Column names
     private static final String ITEM_NAME = "itemname";
+    private static final String CATEGORY = "category";
     private static final String UNIT = "unit";
+    private static final String BARCODE = "barcode";
     private static final String ONE = "one";
     private static final String TWO = "two";
     private static final String FIVE = "five";
@@ -59,7 +112,9 @@ public class LocalDatabase extends SQLiteOpenHelper {
 
     private static final String TABLE_BARCODESPEECH = BARCODE_SPEECH + " ("
             + ITEM_NAME            + " TEXT,"
+            + CATEGORY            + " INTEGER,"
             + UNIT              + " INTEGER,"
+            + BARCODE            + " TEXT,"
             + ONE       + " INTEGER,"
             + TWO      + " INTEGER,"
             + FIVE              + " INTEGER,"
@@ -74,23 +129,25 @@ public class LocalDatabase extends SQLiteOpenHelper {
             + FIVETHOUSAND      + " INTEGER "
             + ")";
 
-    public void saveitemname(String itemname, int unit)
+    public void saveitemname(String itemname, int category, int unit, String barcode)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         // db.execSQL(CREATE_IF_NOT_EXISTS+TABLE_BILLS);
         ContentValues values = new ContentValues();
         values.put(ITEM_NAME, itemname);
+        values.put(CATEGORY, category);
         values.put(UNIT, unit);
+        values.put(BARCODE, barcode);
 
         db.insert(BARCODE_SPEECH, null, values);
     }
 
-    public void updatetablefor0and1(String itemname, String col)
+    public void updatetablefor0and1(String itemname, String col, int num)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(col, 1);
+        values.put(col, num);
         String WHERE1 = String.format("%s='%s'", ITEM_NAME, itemname);
 
         db.update(BARCODE_SPEECH,values, WHERE1, null);
@@ -100,6 +157,66 @@ public class LocalDatabase extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
         this.context=context;
+    }
+
+    public int getcountofitemssaved()
+    {
+        String selectQuery = "SELECT COUNT(*) FROM " + REFERENCE_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        int count=0;
+        if (c.moveToFirst()) {
+            do {
+                count  = c.getInt(0);
+
+            } while (c.moveToNext());
+        }
+        return count;
+    }
+
+    public List<ItemModel> getitemmodel()
+    {
+        List<ItemModel> billsList = new ArrayList<ItemModel>();
+        String selectQuery = "SELECT * FROM " + BARCODE_SPEECH;
+
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                Log.i("temnamae", c.getString(c.getColumnIndex(ITEM_NAME)));
+                Log.i("cat", String.valueOf(c.getString(c.getColumnIndex(CATEGORY))));
+
+                    ItemModel bills = new ItemModel(c.getString(c.getColumnIndex(ITEM_NAME)),
+                            c.getInt(c.getColumnIndex(CATEGORY)),
+                            c.getInt(c.getColumnIndex(UNIT)),
+                            c.getString(c.getColumnIndex(BARCODE)),
+                            c.getInt(c.getColumnIndex(ONE)),
+                            c.getInt(c.getColumnIndex(TWO)),
+                            c.getInt(c.getColumnIndex(FIVE)),
+                            c.getInt(c.getColumnIndex(TEN)),
+                            c.getInt(c.getColumnIndex(FIFTY)),
+                            c.getInt(c.getColumnIndex(HUNDRED)),
+                            c.getInt(c.getColumnIndex(TWOFIFTY)),
+                            c.getInt(c.getColumnIndex(FIVEHUNDRED)),
+                            c.getInt(c.getColumnIndex(THOUSAND)),
+                            c.getInt(c.getColumnIndex(TWOTHOUSAND)),
+                            c.getInt(c.getColumnIndex(TWOTHOUSANDFIVEHUNDRED)),
+                            c.getInt(c.getColumnIndex(FIVETHOUSAND)));
+
+                    billsList.add(bills);
+            } while (c.moveToNext());
+        }
+
+//        billsList2 = billsList.r;
+//        System.out.println(reverseView); // [c, b, a]
+
+        Log.i("billinldb", billsList.toString());
+        return billsList;
+
     }
 
     public String iwanttoseethetable()
@@ -117,8 +234,14 @@ public class LocalDatabase extends SQLiteOpenHelper {
                 if(c.getString(c.getColumnIndex(ITEM_NAME))!=null) {
                     whatever = whatever + "\n" + ITEM_NAME +" - " + c.getString(c.getColumnIndex(ITEM_NAME));
                 }
+                if(c.getString(c.getColumnIndex(CATEGORY))!=null) {
+                    whatever = whatever + "\n" + CATEGORY +" - " + c.getString(c.getColumnIndex(CATEGORY));
+                }
                 if(c.getString(c.getColumnIndex(UNIT))!=null) {
                     whatever = whatever + "\n" + UNIT +" - " + c.getString(c.getColumnIndex(UNIT));
+                }
+                if(c.getString(c.getColumnIndex(BARCODE))!=null) {
+                    whatever = whatever + "\n" + BARCODE +" - " + c.getString(c.getColumnIndex(BARCODE));
                 }
                 if(c.getString(c.getColumnIndex(ONE))!=null) {
                     whatever = whatever + "\n" + ONE +" - " + c.getString(c.getColumnIndex(ONE));
@@ -169,6 +292,7 @@ public class LocalDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         // creating required tables
+        db.execSQL(CREATE_IF_NOT_EXISTS+TABLE_REFERENCE_TABLE);
         db.execSQL(CREATE_IF_NOT_EXISTS+TABLE_BARCODESPEECH);
     }
 
