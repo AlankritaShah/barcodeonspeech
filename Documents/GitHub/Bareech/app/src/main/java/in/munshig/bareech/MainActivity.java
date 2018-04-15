@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public int PERMISSIONS_MULTIPLE_REQUEST = 123;
     static EditText name;
     static Button unit[]=new Button[3];
-    static ToggleButton small[] = new ToggleButton[4];
+    static ToggleButton small[] = new ToggleButton[6];
     static ToggleButton medium[] = new ToggleButton[4];
     static ToggleButton big[] = new ToggleButton[4];
     static Button exists, DNexists;
@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         small[1] = (ToggleButton)findViewById(R.id.toggleButton5);
         small[2] = (ToggleButton)findViewById(R.id.toggleButton6);
         small[3] = (ToggleButton)findViewById(R.id.toggleButton7);
+        small[4] = (ToggleButton)findViewById(R.id.toggleButton17);
+        small[5] = (ToggleButton)findViewById(R.id.toggleButton16);
         medium[0] = (ToggleButton)findViewById(R.id.toggleButton8);
         medium[1] = (ToggleButton)findViewById(R.id.toggleButton9);
         medium[2] = (ToggleButton)findViewById(R.id.toggleButton10);
@@ -612,12 +614,18 @@ public class MainActivity extends AppCompatActivity {
                     sm.setVisibility(View.INVISIBLE);
                     md.setVisibility(View.INVISIBLE);
                     lg.setVisibility(View.INVISIBLE);
-                    for (int i = 0; i < 4; i++) {
+                    for (int i = 0; i < 6; i++) {
 //                    if(i!=3)
 //                    unit[i].setChecked(false);
                         small[i].setVisibility(View.INVISIBLE);
+                        if(i<4)
                         medium[i].setVisibility(View.INVISIBLE);
-                        big[i].setVisibility(View.INVISIBLE);
+                        if(i<4) {
+                            big[i].setText(String.valueOf(Integer.parseInt(big[i].getText().toString().substring(0,1))*1000));
+
+                            big[i].setVisibility(View.INVISIBLE);
+                        }
+
                     }
 
                 }
@@ -648,73 +656,81 @@ public class MainActivity extends AppCompatActivity {
                             catofitem = 4;
 
                         String barcode = "444" + ldb.userphone + String.valueOf(catofitem) + itemcode;
-                        ldb.saveitemname(namevalue, catofitem, unitvalue, barcode);
+                        ldb.saveitemname(itemcode, namevalue, catofitem, unitvalue, barcode);
                         ldb.saveinreferencetable(itemcode, namevalue);
                         Boolean save = sp.savebillno(k + 1);
 
-                        for (int i = 0; i < 4; i++) {
+                        for (int i = 0; i < 6; i++) {
                             if (small[i].isChecked()) {
                                 if (i == 0)
-                                    ldb.updatetablefor0and1(namevalue, "ONE", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "ONE", 1);
                                 if (i == 1)
-                                    ldb.updatetablefor0and1(namevalue, "TWO", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWO", 1);
                                 if (i == 2)
-                                    ldb.updatetablefor0and1(namevalue, "FIVE", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "FIVE", 1);
                                 if (i == 3)
-                                    ldb.updatetablefor0and1(namevalue, "TEN", 1);
-                            }
-                            else
-                            {
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TEN", 1);
+                                if (i == 4)
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "SIX", 1);
+                                if (i == 5)
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWELVE", 1);
+                            } else {
                                 if (i == 0)
-                                    ldb.updatetablefor0and1(namevalue, "ONE", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "ONE", 0);
                                 if (i == 1)
-                                    ldb.updatetablefor0and1(namevalue, "TWO", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWO", 0);
                                 if (i == 2)
-                                    ldb.updatetablefor0and1(namevalue, "FIVE", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "FIVE", 0);
                                 if (i == 3)
-                                    ldb.updatetablefor0and1(namevalue, "TEN", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TEN", 0);
+                                if (i == 4)
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "SIX", 0);
+                                if (i == 5)
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWELVE", 0);
                             }
+                        }
+                        for (int i = 0; i < 4; i++) {
                             if (medium[i].isChecked()) {
                                 if (i == 0)
-                                    ldb.updatetablefor0and1(namevalue, "FIFTY", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "FIFTY", 1);
                                 if (i == 1)
-                                    ldb.updatetablefor0and1(namevalue, "HUNDRED", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "HUNDRED", 1);
                                 if (i == 2)
-                                    ldb.updatetablefor0and1(namevalue, "TWOFIFTY", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWOFIFTY", 1);
                                 if (i == 3)
-                                    ldb.updatetablefor0and1(namevalue, "FIVEHUNDRED", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "FIVEHUNDRED", 1);
                             }
                             else
                             {
                                 if (i == 0)
-                                    ldb.updatetablefor0and1(namevalue, "FIFTY", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "FIFTY", 0);
                                 if (i == 1)
-                                    ldb.updatetablefor0and1(namevalue, "HUNDRED", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "HUNDRED", 0);
                                 if (i == 2)
-                                    ldb.updatetablefor0and1(namevalue, "TWOFIFTY", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWOFIFTY", 0);
                                 if (i == 3)
-                                    ldb.updatetablefor0and1(namevalue, "FIVEHUNDRED", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "FIVEHUNDRED", 0);
                             }
                             if (big[i].isChecked()) {
                                 if (i == 0)
-                                    ldb.updatetablefor0and1(namevalue, "THOUSAND", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "THOUSAND", 1);
                                 if (i == 1)
-                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSAND", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWOTHOUSAND", 1);
                                 if (i == 2)
-                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSANDFIVEHUNDRED", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWOTHOUSANDFIVEHUNDRED", 1);
                                 if (i == 3)
-                                    ldb.updatetablefor0and1(namevalue, "FIVETHOUSAND", 1);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "FIVETHOUSAND", 1);
                             }
                             else
                             {
                                 if (i == 0)
-                                    ldb.updatetablefor0and1(namevalue, "THOUSAND", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "THOUSAND", 0);
                                 if (i == 1)
-                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSAND", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWOTHOUSAND", 0);
                                 if (i == 2)
-                                    ldb.updatetablefor0and1(namevalue, "TWOTHOUSANDFIVEHUNDRED", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "TWOTHOUSANDFIVEHUNDRED", 0);
                                 if (i == 3)
-                                    ldb.updatetablefor0and1(namevalue, "FIVETHOUSAND", 0);
+                                    ldb.updatetablefor0and1(itemcode, namevalue, "FIVETHOUSAND", 0);
                             }
                         }
                         //   name.setText("");
@@ -737,25 +753,29 @@ public class MainActivity extends AppCompatActivity {
                         sm.setVisibility(View.INVISIBLE);
                         md.setVisibility(View.INVISIBLE);
                         lg.setVisibility(View.INVISIBLE);
-                        for (int j = 0; j < 4; j++) {
+                        for (int j = 0; j < 6; j++) {
 //                        if (j != 3)
 //                            unit[j].setChecked(false);
                             if (small[j].isChecked())
                                 small[j].setChecked(false);
-                            if (medium[j].isChecked())
-                                medium[j].setChecked(false);
-                            if (big[j].isChecked())
-                                big[j].setChecked(false);
+                            if(j<4) {
+                                if (medium[j].isChecked())
+                                    medium[j].setChecked(false);
+                                if (big[j].isChecked())
+                                    big[j].setChecked(false);
+
+                                medium[j].setVisibility(View.INVISIBLE);
+                                big[j].setText(String.valueOf(Integer.parseInt(big[j].getText().toString().substring(0,1))*1000));
+                                big[j].setVisibility(View.INVISIBLE);
+                            }
                             small[j].setVisibility(View.INVISIBLE);
-                            medium[j].setVisibility(View.INVISIBLE);
-                            big[j].setVisibility(View.INVISIBLE);
                         }
                         Log.i("returnref", ldb.iwanttoseethereftable());
                         Log.i("return", ldb.iwanttoseethetable());
                         unitvalue = -1;
                     }
                     if (!namevalue.equals("") && unitvalue == -1) {
-                        Toast.makeText(getApplicationContext(), "Select one of the units to proceed.", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getApplicationContext(), "Select one of the units to proceed.", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -944,23 +964,53 @@ public class MainActivity extends AppCompatActivity {
                         sm.setText("Gram - Small");
                         md.setText("Gram - Medium");
                         lg.setText("Gram - Large");
+                        for (int j = 0; j < 6; j++) {
+                            small[j].setVisibility(View.VISIBLE);
+                            if(j<4)
+                                medium[j].setVisibility(View.VISIBLE);
+                            if(j<4) {
+                                big[j].setVisibility(View.VISIBLE);
+                                int forbignum = Integer.parseInt(big[j].getText().toString())/1000;
+                                big[j].setText(String.valueOf(forbignum)+"kg");
+                                big[j].setTextOff(String.valueOf(forbignum)+"kg");
+                                big[j].setTextOn(String.valueOf(forbignum)+"kg");
+                            }
+                        }
                     }
                     else if(someunitvalue == 1) {
                         sm.setText("miliLitre - Small");
                         md.setText("miliLitre - Medium");
                         lg.setText("miliLitre - Large");
+                        for (int j = 0; j < 6; j++) {
+                            small[j].setVisibility(View.VISIBLE);
+                            if(j<4)
+                                medium[j].setVisibility(View.VISIBLE);
+                            if(j<4) {
+                                big[j].setVisibility(View.VISIBLE);
+                                int forbignum = Integer.parseInt(big[j].getText().toString())/1000;
+                                big[j].setText(String.valueOf(forbignum)+"L");
+                                big[j].setTextOff(String.valueOf(forbignum)+"L");
+                                big[j].setTextOn(String.valueOf(forbignum)+"L");
+                            }
+                        }
                     }
                     else if(someunitvalue == 2) {
                         sm.setText("unit - Small");
                         md.setText("unit - Medium");
                         lg.setText("unit - Large");
+                        for (int j = 0; j < 6; j++) {
+                            small[j].setVisibility(View.VISIBLE);
+                            if(j<4)
+                                medium[j].setVisibility(View.VISIBLE);
+                            if(j<4) {
+                                big[j].setVisibility(View.VISIBLE);
+//                                int forbignum = Integer.parseInt(big[j].getText().toString())/1000;
+//                                big[j].setTextOff(String.valueOf(forbignum)+"");
+//                                big[j].setTextOn(String.valueOf(forbignum)+"kg");
+                            }
+                        }
                     }
-                    for (int j = 0; j < 4; j++) {
-                        small[j].setVisibility(View.VISIBLE);
-                        medium[j].setVisibility(View.VISIBLE);
-                        big[j].setVisibility(View.VISIBLE);
 
-                    }
                 }
     }
 }

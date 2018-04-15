@@ -12,13 +12,13 @@ public class ItemModel implements Serializable{
     public int category;
     public int unit;
     public String barcode;
-    public int one,two,five, ten, fifty, hundred, twofifty, fivehundred, onethousand, twothousand, twothousandfivehundred, fivethousand;
+    public int one,two,five, six, ten, twelve, fifty, hundred, twofifty, fivehundred, onethousand, twothousand, twothousandfivehundred, fivethousand;
 
     public ItemModel(){
 
     }
 
-    public ItemModel(String itemname, int category, int unit, String barcode, int one, int two, int five, int ten, int fifty, int hundred, int twofifty, int fivehundred, int onethousand, int twothousand, int twothousandfivehundred, int fivethousand){
+    public ItemModel(String itemname, int category, int unit, String barcode, int one, int two, int five, int six, int ten, int twelve, int fifty, int hundred, int twofifty, int fivehundred, int onethousand, int twothousand, int twothousandfivehundred, int fivethousand){
         //  this.firebaseid=firebaseid;
         this.itemname=itemname;
         this.category=category;
@@ -27,7 +27,9 @@ public class ItemModel implements Serializable{
         this.one=one;
         this.two=two;
         this.five = five;
+        this.six = six;
         this.ten=ten;
+        this.twelve = twelve;
         this.fifty=fifty;
         this.hundred=hundred;
         this.twofifty=twofifty;

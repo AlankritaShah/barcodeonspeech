@@ -91,48 +91,50 @@
         android:layout_alignParentStart="true" />
 
     <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New ToggleButton"
         android:id="@+id/toggleButton4"
-        android:layout_centerVertical="true"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:visibility="invisible"
-        android:textOn="1"
-        android:textOff="1"/>
-
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New ToggleButton"
-        android:id="@+id/toggleButton5"
-        android:layout_alignBottom="@+id/toggleButton4"
-        android:layout_toEndOf="@+id/toggleButton4"
-        android:visibility="invisible"
-        android:textOn="2"
-        android:textOff="2"/>
-
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New ToggleButton"
-        android:id="@+id/toggleButton6"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/toggleButton5"
-        android:visibility="invisible"
-        android:textOn="5"
-        android:textOff="5"/>
+        android:text="New ToggleButton"
+        android:textOff="1"
+        android:textOn="1"
+        android:visibility="invisible" />
 
     <ToggleButton
-        android:layout_width="wrap_content"
+        android:id="@+id/toggleButton5"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="67dp"
         android:text="New ToggleButton"
+        android:textOff="2"
+        android:textOn="2"
+        android:visibility="invisible" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton6"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="134dp"
+        android:text="New ToggleButton"
+        android:textOff="5"
+        android:textOn="5"
+        android:visibility="invisible" />
+
+    <ToggleButton
         android:id="@+id/toggleButton7"
-        android:layout_alignTop="@+id/toggleButton6"
-        android:layout_toEndOf="@+id/toggleButton6"
-        android:visibility="invisible"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/toggleButton3"
+        android:layout_centerVertical="true"
+        android:text="New ToggleButton"
+        android:textOff="10"
         android:textOn="10"
-        android:textOff="10"/>
+        android:visibility="invisible" />
 
     <ToggleButton
         android:layout_width="wrap_content"
@@ -140,7 +142,6 @@
         android:text="New ToggleButton"
         android:id="@+id/toggleButton8"
         android:layout_above="@+id/textView3"
-        android:layout_toStartOf="@+id/toggleButton5"
         android:layout_marginBottom="15dp"
         android:visibility="invisible"
         android:textOn="50"
@@ -166,7 +167,7 @@
         android:textOn="250"
         android:textOff="250"
         android:layout_alignTop="@+id/toggleButton9"
-        android:layout_toStartOf="@+id/toggleButton11" />
+        android:layout_toRightOf="@+id/toggleButton9" />
 
     <ToggleButton
         android:layout_width="wrap_content"
@@ -182,7 +183,7 @@
     <ToggleButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New ToggleButton"
+        android:text="1000"
         android:id="@+id/toggleButton12"
         android:layout_alignTop="@+id/toggleButton15"
         android:layout_alignParentStart="true"
@@ -193,7 +194,7 @@
     <ToggleButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New ToggleButton"
+        android:text="2000"
         android:id="@+id/toggleButton13"
         android:layout_alignBottom="@+id/toggleButton12"
         android:layout_toEndOf="@+id/toggleButton12"
@@ -204,7 +205,7 @@
     <ToggleButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New ToggleButton"
+        android:text="2500"
         android:id="@+id/toggleButton14"
         android:layout_alignBottom="@+id/toggleButton13"
         android:layout_toEndOf="@+id/toggleButton13"
@@ -215,7 +216,7 @@
     <ToggleButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New ToggleButton"
+        android:text="5000"
         android:id="@+id/toggleButton15"
         android:layout_above="@+id/button"
         android:layout_toEndOf="@+id/toggleButton14"
@@ -249,5 +250,26 @@
         android:layout_alignTop="@+id/textView4"
         android:layout_marginEnd="16dp"
         android:text="TextView" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton16"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"
+        android:textOff="12"
+        android:textOn="12" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton17"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="131dp"
+        android:visibility="invisible"
+        android:textOff="6"
+        android:textOn="6" />
 
 </RelativeLayout>

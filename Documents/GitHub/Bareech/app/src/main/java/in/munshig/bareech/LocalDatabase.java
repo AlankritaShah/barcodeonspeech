@@ -99,6 +99,8 @@ public class LocalDatabase extends SQLiteOpenHelper {
     private static final String TWO = "two";
     private static final String FIVE = "five";
     private static final String TEN = "ten";
+    private static final String SIX = "six";
+    private static final String TWELVE = "twelve";
     private static final String FIFTY = "fifty";
     private static final String HUNDRED = "hundred";
     private static final String TWOFIFTY = "twofifty";
@@ -118,7 +120,9 @@ public class LocalDatabase extends SQLiteOpenHelper {
             + ONE       + " INTEGER,"
             + TWO      + " INTEGER,"
             + FIVE              + " INTEGER,"
+            + SIX              + " INTEGER,"
             + TEN         + " INTEGER,"
+            + TWELVE              + " INTEGER,"
             + FIFTY        + " INTEGER, "
             + HUNDRED            + " INTEGER, "
             + TWOFIFTY           + " INTEGER, "
@@ -129,7 +133,7 @@ public class LocalDatabase extends SQLiteOpenHelper {
             + FIVETHOUSAND      + " INTEGER "
             + ")";
 
-    public void saveitemname(String itemname, int category, int unit, String barcode)
+    public void saveitemname(String itemcode, String itemname, int category, int unit, String barcode)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         // db.execSQL(CREATE_IF_NOT_EXISTS+TABLE_BILLS);
@@ -140,13 +144,13 @@ public class LocalDatabase extends SQLiteOpenHelper {
         values.put(BARCODE, barcode);
 
         db.insert(BARCODE_SPEECH, null, values);
-        MainActivity.datauser.child(itemname).child(ITEM_NAME).setValue(itemname);
-        MainActivity.datauser.child(itemname).child(CATEGORY).setValue(category);
-        MainActivity.datauser.child(itemname).child(UNIT).setValue(unit);
-        MainActivity.datauser.child(itemname).child(BARCODE).setValue(barcode);
+        MainActivity.datauser.child(itemcode).child(ITEM_NAME).setValue(itemname);
+        MainActivity.datauser.child(itemcode).child(CATEGORY).setValue(category);
+        MainActivity.datauser.child(itemcode).child(UNIT).setValue(unit);
+        MainActivity.datauser.child(itemcode).child(BARCODE).setValue(barcode);
     }
 
-    public void updatetablefor0and1(String itemname, String col, int num)
+    public void updatetablefor0and1(String itemcode, String itemname, String col, int num)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -155,7 +159,7 @@ public class LocalDatabase extends SQLiteOpenHelper {
         String WHERE1 = String.format("%s='%s'", ITEM_NAME, itemname);
 
         db.update(BARCODE_SPEECH,values, WHERE1, null);
-        MainActivity.datauser.child(itemname).child(col).setValue(num);
+        MainActivity.datauser.child(itemcode).child(col).setValue(num);
     }
 
     public LocalDatabase(Context context) {
@@ -202,7 +206,9 @@ public class LocalDatabase extends SQLiteOpenHelper {
                             c.getInt(c.getColumnIndex(ONE)),
                             c.getInt(c.getColumnIndex(TWO)),
                             c.getInt(c.getColumnIndex(FIVE)),
+                            c.getInt(c.getColumnIndex(SIX)),
                             c.getInt(c.getColumnIndex(TEN)),
+                            c.getInt(c.getColumnIndex(TWELVE)),
                             c.getInt(c.getColumnIndex(FIFTY)),
                             c.getInt(c.getColumnIndex(HUNDRED)),
                             c.getInt(c.getColumnIndex(TWOFIFTY)),
@@ -257,8 +263,14 @@ public class LocalDatabase extends SQLiteOpenHelper {
                 if(c.getString(c.getColumnIndex(FIVE))!=null) {
                     whatever = whatever + "\n" + FIVE +" - " + c.getString(c.getColumnIndex(FIVE));
                 }
+                if(c.getString(c.getColumnIndex(SIX))!=null) {
+                    whatever = whatever + "\n" + SIX +" - " + c.getString(c.getColumnIndex(SIX));
+                }
                 if(c.getString(c.getColumnIndex(TEN))!=null) {
                     whatever = whatever + "\n" + TEN +" - " + c.getString(c.getColumnIndex(TEN));
+                }
+                if(c.getString(c.getColumnIndex(TWELVE))!=null) {
+                    whatever = whatever + "\n" + TWELVE +" - " + c.getString(c.getColumnIndex(TWELVE));
                 }
                 if(c.getString(c.getColumnIndex(FIFTY))!=null) {
                     whatever = whatever + "\n" + FIFTY +" - " + c.getString(c.getColumnIndex(FIFTY));

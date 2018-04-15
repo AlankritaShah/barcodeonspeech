@@ -72,8 +72,12 @@ public class ViewAdapter extends ArrayAdapter<ItemModel> {
             qua=qua+"2, ";
         if(thing.five==1)
             qua=qua+"5, ";
+        if(thing.six == 1)
+            qua = qua + "6, ";
         if(thing.ten==1)
             qua=qua+"10, ";
+        if(thing.twelve == 1)
+            qua = qua + "12, ";
         if(thing.fifty==1)
             qua=qua+"50, ";
         if(thing.hundred==1)
