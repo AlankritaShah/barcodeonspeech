@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "976034484099",
+    "firebase_url": "https://kiranamark3-274bf.firebaseio.com",
+    "project_id": "kiranamark3-274bf",
+    "storage_bucket": "kiranamark3-274bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976034484099:android:c74e425b8b149cb5",
+        "android_client_info": {
+          "package_name": "munshig.in.kiranamark3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976034484099-ditpsnlfc5bgp7ujjg5u2in5f8ml1nig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf02sbnJaRX7IQWw9KLrZMPFNHIKJTC5c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
